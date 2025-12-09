@@ -1,14 +1,13 @@
 import express, { Request, Response } from 'express';
-import { createProduct, getAllProducts } from '../controllers/product.controller';
+import { createProduct, getProducts, getProduct, updateProduct, deleteProduct } from '../controllers/product.controller';
 const router = express.Router();
 
-router.get('/', getAllProducts)
+router.get('/', getProducts)
 
 router.post('/', createProduct)
 
-router.get('/:id', (req: Request, res: Response) => {
-    // GET PRODUCT BY ID
-    res.send("test")
-})
+router.get('/:id', getProduct)
+router.put('/:id', updateProduct)
+router.delete('/:id', deleteProduct)
 
 export default router;
