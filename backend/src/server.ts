@@ -7,6 +7,7 @@ import morgan from "morgan"
 
 const app = express()
 
+// MIDDLEWARES
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
@@ -38,6 +39,7 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
     }
 })
 
-app.use("/api/products", productRoutes);
+// ENDPOINTS
+app.use("/api/v1/products", productRoutes);
 
 export default app;
