@@ -65,3 +65,14 @@ export const THEMES = [
     colors: ["#282A36", "#BD93F9", "#FF79C6"],
   },
 ];
+
+export type ThemeName = typeof THEMES[number]["name"];
+export type Theme = typeof THEMES[number];
+
+export const getThemeColors = (themeName: ThemeName): [string, string, string] => {
+  const theme = THEMES.find(t => t.name === themeName);
+  if (!theme) {
+    return ["#ffd8d8", "#b7e4c7", "#d8b4fe"];
+  }
+  return theme.colors as [string, string, string];
+};
