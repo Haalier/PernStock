@@ -2,13 +2,15 @@ import { Link } from 'react-router';
 import type { Product } from '../models/ProductModel';
 import { EditIcon, Trash2Icon } from 'lucide-react';
 import { useDeleteProduct } from '../hooks/useProducts';
+import ConfirmModal from './ConfirmModal';
 
 function ProductCard({ product }: { product: Product }) {
-	const { mutate, isPending } = useDeleteProduct();
+	const { isPending } = useDeleteProduct();
 
-	const handleDeleteProduct = (id: number) => {
-		mutate(id);
-	};
+	function openConfirmModal(): void {
+		const modal = document.getElementById('confirm_delete_dialog') as HTMLDialogElement;
+		modal.showModal();
+	}
 
 	return (
 		<div
@@ -35,10 +37,11 @@ function ProductCard({ product }: { product: Product }) {
 					<EditIcon className='size--4' />
 				</Link>
 
-				<button className='btn btn-sm btn-error btn-outline' onClick={() => handleDeleteProduct(product.id)}>
+				<button className='btn btn-sm btn-error btn-outline' onClick={openConfirmModal}>
 					<Trash2Icon className='size-4' />
 				</button>
 			</div>
+			<ConfirmModal id={product.id} />
 		</div>
 	);
 }

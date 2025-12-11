@@ -4,17 +4,21 @@ import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import { useThemeStore } from './store/useThemeStore';
 import { Toaster } from 'react-hot-toast';
+import NotFound404 from './pages/NotFound404';
 
 export default function App() {
 	const { theme, themeColors } = useThemeStore();
 	return (
-		<div className='min-h-svh bg-base-200 transition-colors duration-300' data-theme={theme}>
+		<div className='min-h-svh flex flex-col bg-base-200 transition-colors duration-300' data-theme={theme}>
 			<Navbar />
 
-			<Routes>
-				<Route path='/' element={<HomePage />} />
-				<Route path='/' element={<ProductPage />} />
-			</Routes>
+			<div className='flex-1 min-h-full'>
+				<Routes>
+					<Route path='/' element={<HomePage />} />
+					<Route path='/product/:id' element={<ProductPage />} />
+					<Route path='*' element={<NotFound404 />} />
+				</Routes>
+			</div>
 			<Toaster
 				toastOptions={{
 					duration: 5000,
